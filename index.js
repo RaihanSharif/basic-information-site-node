@@ -31,18 +31,3 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8080);
-
-/*
-swit (req.url === "/") {
-    path += "index.html";
-    res.writeHead(200, { "content-type": "text/html" });
-    fs.readFile(path, "utf-8", (err, data) => {
-      if (err) {
-        console.log(err);
-        res.end();
-      } else {
-        res.end(data);
-      }
-    });
-  }
-    */
