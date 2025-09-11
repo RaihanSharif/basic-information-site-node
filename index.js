@@ -22,6 +22,7 @@ const server = http.createServer((req, res) => {
   }
   fs.readFile(path, "utf-8", (err, content) => {
     if (err) {
+      res.writeHead(500, { "content-type": "text/plain" });
       console.log(err);
       res.end();
     } else {
