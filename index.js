@@ -1,0 +1,48 @@
+const http = require("node:http");
+const fs = require("node:fs");
+
+const server = http.createServer((req, res) => {
+  let path = "./views/";
+  switch (req.url) {
+    case "/":
+      path += "index.html";
+      res.writeHead(200, { "content-type": "text/html" });
+      break;
+    case "/about":
+      path += "about.html";
+      res.writeHead(200, { "content-type": "text/html" });
+      break;
+    case "/contact-me":
+      path += "contact-me.html";
+      res.writeHead(200, { "content-type": "text/html" });
+      break;
+    default:
+      res.writeHead(404, { "content-type": "text/html" });
+      path += "404.html";
+  }
+  fs.readFile(path, "utf-8", (err, content) => {
+    if (err) {
+      console.log(err);
+      res.end();
+    } else {
+      res.end(content);
+    }
+  });
+});
+
+server.listen(8080);
+
+/*
+swit (req.url === "/") {
+    path += "index.html";
+    res.writeHead(200, { "content-type": "text/html" });
+    fs.readFile(path, "utf-8", (err, data) => {
+      if (err) {
+        console.log(err);
+        res.end();
+      } else {
+        res.end(data);
+      }
+    });
+  }
+    */
