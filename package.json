@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RaihanSharif/basic-information-site-node/issues"
   },
-  "homepage": "https://github.com/RaihanSharif/basic-information-site-node#readme"
+  "homepage": "https://github.com/RaihanSharif/basic-information-site-node#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

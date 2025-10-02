@@ -1,34 +1,35 @@
 const http = require("node:http");
 const fs = require("node:fs");
+const express = require("express");
+const path = require("path");
 
-const server = http.createServer((req, res) => {
-  let path = "./views/";
-  switch (req.url) {
-    case "/":
-      path += "index.html";
-      res.writeHead(200, { "content-type": "text/html" });
-      break;
-    case "/about":
-      path += "about.html";
-      res.writeHead(200, { "content-type": "text/html" });
-      break;
-    case "/contact-me":
-      path += "contact-me.html";
-      res.writeHead(200, { "content-type": "text/html" });
-      break;
-    default:
-      res.writeHead(404, { "content-type": "text/html" });
-      path += "404.html";
-  }
-  fs.readFile(path, "utf-8", (err, content) => {
-    if (err) {
-      res.writeHead(500, { "content-type": "text/plain" });
-      console.log(err);
-      res.end();
-    } else {
-      res.end(content);
-    }
-  });
+const app = express();
+
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: path.join(__dirname, "views") });
 });
 
-server.listen(8080);
+app.get("/:route", (req, res) => {
+  const route = req.params.route;
+
+  console.log(route);
+  switch (route) {
+    case "about":
+      console.log("lol");
+      res.sendFile("about.html", { root: path.join(__dirname, "views") });
+      break;
+    case "contact-me":
+      res.sendFile("contact-me.html", { root: path.join(__dirname, "views") });
+      break;
+    default:
+      res.sendFile("404.html", { root: path.join(__dirname, "views") });
+  }
+});
+
+// server.listen(8080);
+app.listen(8000, (error) => {
+  if (error) {
+    throw error;
+  }
+  console.log(`simpe info site -- listening on port 8000`);
+});
